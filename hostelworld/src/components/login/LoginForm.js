@@ -11,8 +11,7 @@ const LoginForm = ({
   closeAlert,
   form : {
     getFieldDecorator,
-    validateFields,
-    getFieldsValue,
+    validateFields
   }
 
 }) => {
@@ -49,7 +48,9 @@ const LoginForm = ({
       <div className={styles['alert']}>
         {loginFailure(alertVisible)}
       </div>
-
+      <div className={styles['logo']}>
+        <img src="http://hostel-world.oss-cn-shanghai.aliyuncs.com/images/logo.png" />
+      </div>
       <Card className={styles['card']}>
       <Form className={styles["login-inline-form"]} onSubmit={handleSubmit} >
         <FormItem>

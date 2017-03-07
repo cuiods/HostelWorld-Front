@@ -4,7 +4,7 @@
 import {request} from '../utils/request';
 
 export async function login(params) {
-  return request(`/user/auth`,{
+  return request(`/auth`,{
     method: `POST`,
     body: JSON.stringify({
       username: params.username,

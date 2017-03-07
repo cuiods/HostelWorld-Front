@@ -27,16 +27,22 @@ export default {
 
       if(data){
 
-        let verifyFlag = data.ok;
+        let verifyFlag = data.code;
 
-        if(verifyFlag){
+        console.log(data);
 
-          BasicAuth.setAuth(payload.username, payload.password, data.avatar);
+        if(verifyFlag == 200){
+
+          let userVo = data.data;
+
+          BasicAuth.setAuth(payload.username, payload.password, userVo.avatar);
 
           yield put({
             type: 'loggedInUser/storeInfo',
-            payload: data
+            payload: userVo
           });
+
+          console.log(userVo);
 
           if(data.type === 'student'){
 
@@ -66,10 +72,6 @@ export default {
   },
 
   reducers: {
-    updateLoginSucceed(state, action) {
-      const userId = action.payload;
-      return { ...state, userId, alertVisible: false };
-    },
 
     showAlert(state) {
       return { ...state, alertVisible: true };
