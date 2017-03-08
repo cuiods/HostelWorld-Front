@@ -3,18 +3,18 @@
  * @author cuihao
  */
 import React, { PropTypes } from 'react';
-import { routerRedux } from 'dva/router';
 import { connect } from 'dva';
 import LoginForm from '../components/login/LoginForm';
 
 
 function LoginPage({ location, dispatch, signInInfo }) {
 
-  const {userId, alertVisible} = signInInfo;
+  const {userId, alertVisible, loginMsg} = signInInfo;
 
   const userLoginProps = {
     userId,
     alertVisible,
+    loginMsg,
 
     onLogin(fieldsValue) {
       dispatch({

@@ -8,6 +8,7 @@ const LoginForm = ({
   userId,
   onLogin,
   alertVisible,
+  loginMsg,
   closeAlert,
   form : {
     getFieldDecorator,
@@ -33,8 +34,8 @@ const LoginForm = ({
   function loginFailure(alertVisible) {
     if(alertVisible){
       return (<Alert
-        message="登录失败"
-        description="错误的用户名或密码"
+        message="Login failed."
+        description={loginMsg}
         type="error"
         closable
         onClose={onClose}
@@ -45,27 +46,27 @@ const LoginForm = ({
   return (
     <div className={styles['login-form']}>
 
-      <div className={styles['alert']}>
-        {loginFailure(alertVisible)}
-      </div>
       <div className={styles['logo']}>
         <img src="http://hostel-world.oss-cn-shanghai.aliyuncs.com/images/logo.png" />
+      </div>
+      <div className={styles['alert']}>
+        {loginFailure(alertVisible)}
       </div>
       <Card className={styles['card']}>
       <Form className={styles["login-inline-form"]} onSubmit={handleSubmit} >
         <FormItem>
           {getFieldDecorator('username', {
             initialValue: userId,
-            rules: [{required: true, message: '请输入用户名!'}],
+            rules: [{required: true, message: 'Please enter user name!'}],
           })(
-            <Input addonBefore={<Icon type="user"/>} placeholder="用户名"/>
+            <Input addonBefore={<Icon type="user"/>} placeholder="username"/>
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('password', {
-            rules: [{required: true, message: '请输入密码!'}],
+            rules: [{required: true, message: 'Please enter password!'}],
           })(
-            <Input addonBefore={<Icon type="lock"/>} type="password" placeholder="密码"/>
+            <Input addonBefore={<Icon type="lock"/>} type="password" placeholder="password"/>
           )}
         </FormItem>
         <FormItem style={{marginBottom: 0}}>
@@ -73,13 +74,13 @@ const LoginForm = ({
             valuePropName: 'checked',
             initialValue: true,
           })(
-            <Checkbox>自动登录</Checkbox>
+            <Checkbox>Remember me</Checkbox>
           )}
-          <a className={styles["login-form-forgot"]}>忘记密码</a>
+          <a className={styles["login-form-forgot"]}>Forget your password?</a>
           <Button type="primary" htmlType="submit" className={styles["login-form-button"]}>
-            登 录
+            Login
           </Button>
-          或者 <a>注册账号</a>
+          or <a>register</a>
         </FormItem>
       </Form>
       </Card>
