@@ -36,7 +36,7 @@ export default {
           BasicAuth.setAuth(payload.username, payload.password, userVo.avatar);
 
           yield put({
-            type: 'loggedInUser/storeInfo',
+            type: 'app/storeInfo',
             payload: userVo
           });
 
