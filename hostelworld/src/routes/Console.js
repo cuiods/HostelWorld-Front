@@ -8,6 +8,7 @@ import Bread from '../components/layout/bread'
 import Footer from '../components/layout/footer'
 import Sider from '../components/layout/sider'
 import LoginForm from '../components/login/LoginForm';
+import { BackTop } from 'antd';
 import styles from '../components/layout/main.less'
 import '../components/layout/common.less'
 import { classnames } from '../utils'
@@ -84,6 +85,7 @@ function Console({children, location, dispatch, app}) {
               </div>
             </div>
             <Footer />
+            <BackTop />
           </div>
         </div>:<LoginForm {...userLoginProps}/>}
     </div>

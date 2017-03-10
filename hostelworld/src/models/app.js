@@ -1,6 +1,6 @@
 import cookie from 'react-cookie';
 import {routerRedux} from 'dva/router';
-import {login} from "../services/verifyService";
+import {login, logout} from "../services/verifyService";
 import BasicAuth from "../utils/BasicAuth";
 
 export default {
@@ -116,12 +116,10 @@ export default {
     *logout ({
       payload
     }, {call, put}) {
-      const data = yield call(logout, parse(payload))
-      if (data.success) {
+      const data = yield call(logout, payload);
         yield put({
           type: 'logoutSuccess'
         })
-      }
     },
   },
 

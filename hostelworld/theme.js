@@ -4,6 +4,5 @@
 module.exports = () => {
   return{
     'font-size-base': '14px',
-    'primary-color': '#008B8B'
   };
 };

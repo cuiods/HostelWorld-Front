@@ -12,3 +12,9 @@ export async function login(params) {
     })
   });
 }
+
+export async function logout(params) {
+  return request(`/auth/logout`, {
+    method: `GET`
+  })
+}

@@ -2,14 +2,16 @@
  * hotel info model
  */
 import pathToRegexp from 'path-to-regexp';
-import {getHotelList} from "../services/hotelService";
+import {getHotelList, getHotelDetail} from "../services/hotelService";
 
 export default {
-  namespace: 'hotelModel',
+  namespace: 'hotelInfo',
 
   state: {
+    visible: false,
     hotel_list: [],
     current_hotel: {},
+    current_room: {},
     totalElements: 0,
     totalPages: 1,
     hotel_last: true,
@@ -25,7 +27,17 @@ export default {
             type: 'query',
             payload: {
               page: 0,
-              pageSize: 10
+              pageSize: 4
+            }
+          })
+        }
+        const matchDetail = pathToRegexp('/hotelDetail/:hotelId').exec(location.pathname);
+        if (matchDetail) {
+          let hotelId = matchDetail[1];
+          dispatch({
+            type: 'queryDetail',
+            payload: {
+              hotelId: hotelId
             }
           })
         }
@@ -44,6 +56,16 @@ export default {
         })
       }
     },
+
+    *queryDetail({payload},{call,put}) {
+      const data = yield call(getHotelDetail,payload);
+      if (data) {
+        yield put({
+          type: 'setHotelDetail',
+          payload: data
+        })
+      }
+    }
   },
 
   reducers: {
@@ -55,6 +77,12 @@ export default {
         totalPages: action.payload.totalPages,
         hotel_last: action.payload.last,
         hotel_first: action.payload.first,
+      }
+    },
+    setHotelDetail(state, action) {
+      return {
+        ...state,
+        current_hotel: action.payload
       }
     }
   }

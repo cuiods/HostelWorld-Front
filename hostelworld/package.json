@@ -17,7 +17,8 @@
     "react": "^15.1.0",
     "react-cookie": "^1.0.4",
     "react-dom": "^15.1.0",
-    "watchjs": "0.0.0"
+    "watchjs": "0.0.0",
+    "react-countup": "latest"
   },
   "devDependencies": {
     "atool-build": "^0.7.6",
