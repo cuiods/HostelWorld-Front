@@ -2,18 +2,21 @@
  * show hotel detail
  */
 import React, { PropTypes } from 'react'
-import { Button , Rate, Table} from 'antd'
+import { Button , Rate, Table, Modal} from 'antd'
 import styles from './HotelDetailBlock.less';
 import CountUp from 'react-countup'
 import  {color}  from '../../utils'
 function HotelDetailBlock({avatar,fullname,location,locationX,locationY,
-                          createdAt, updatedAt,description,summary,star,picture,roomVos}) {
+                          createdAt, updatedAt,description,summary,star,picture,roomVos,onReserve}) {
   const countUpProps = {
     start: 0,
     duration: 2.75,
     useEasing: true,
     useGrouping: true,
     separator: ','
+  };
+  const handleClick = (record, e) => {
+      onReserve(record);
   };
   let value = 0;
   if (star == "one") value = 1;
@@ -42,14 +45,19 @@ function HotelDetailBlock({avatar,fullname,location,locationX,locationY,
     dataIndex: 'leftRoom',
     key:'leftRoom'
   },{
-    title: '价格',
+    title: '原价',
     dataIndex: 'price',
     key:'price'
   },{
+    title: '现价',
+    dataIndex: 'special',
+    key:'special',
+    render: text => Number(text)>0? text: "无折扣"
+  },{
     title: '操作',
     key: 'op',
-    render: (text) => (
-      <Button type='primary'>预约</Button>
+    render: (text,record) => (
+      <Button type='primary' onClick={(e) => handleClick(record, e)}>预约</Button>
     )
   }];
   return (<div className={styles.user}>

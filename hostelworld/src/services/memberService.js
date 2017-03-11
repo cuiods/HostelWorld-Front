@@ -34,7 +34,7 @@ export async function createMember(params) {
 
 export async function editMember(params) {
   return request(`/member/edit`, {
-    method: `PUT`,
+    method: `POST`,
     body: JSON.stringify({
       memberId: params.memberId,
       password: params.password,

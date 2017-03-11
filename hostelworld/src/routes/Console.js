@@ -8,13 +8,13 @@ import Bread from '../components/layout/bread'
 import Footer from '../components/layout/footer'
 import Sider from '../components/layout/sider'
 import LoginForm from '../components/login/LoginForm';
-import { BackTop } from 'antd';
+import { BackTop , message} from 'antd';
 import styles from '../components/layout/main.less'
 import '../components/layout/common.less'
 import { classnames } from '../utils'
 function Console({children, location, dispatch, app}) {
   const {user,isLogin, loading, loginButtonLoading, menuPopoverVisible,
-    siderFold, darkTheme,isNavbar, navOpenKeys,userId, alertVisible, loginMsg} = app;
+    siderFold, darkTheme,isNavbar, navOpenKeys,userId, alertVisible, loginMsg, appMsg, msgType} = app;
   const userLoginProps = {
     userId,
     alertVisible,
@@ -55,6 +55,7 @@ function Console({children, location, dispatch, app}) {
       dispatch({ type: 'app/handleNavOpenKeys', payload: { navOpenKeys: openKeys } })
     }
   };
+  let id = user.id;
   const siderProps = {
     siderFold,
     darkTheme,
@@ -66,7 +67,8 @@ function Console({children, location, dispatch, app}) {
     changeOpenKeys (openKeys) {
       localStorage.setItem('navOpenKeys', JSON.stringify(openKeys));
       dispatch({ type: 'app/handleNavOpenKeys', payload: { navOpenKeys: openKeys } })
-    }
+    },
+    userId: id
   };
 
   return (

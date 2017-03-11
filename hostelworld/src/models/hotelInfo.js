@@ -21,7 +21,7 @@ export default {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(location => {
-        const match = pathToRegexp('/hotelList').exec(location.pathname);
+        const match = pathToRegexp('/:userId/hotelList').exec(location.pathname);
         if (match) {
           dispatch({
             type: 'query',
@@ -83,6 +83,19 @@ export default {
       return {
         ...state,
         current_hotel: action.payload
+      }
+    },
+    hideModal(state) {
+      return {
+        ...state,
+        visible: false
+      }
+    },
+    showModal(state,action) {
+      return {
+        ...state,
+        visible: true,
+        current_room: action.payload.item
       }
     }
   }

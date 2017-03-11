@@ -2,52 +2,24 @@ module.exports = [
   {
     key: 'hotelList',
     name: '酒店预约',
-    icon: 'laptop'
+    icon: 'home'
   },
   {
-    key: 'users',
-    name: '用户管理',
+    key: 'reserveList',
+    name: '我的预约',
+    icon: 'phone'
+  },
+  {
+    key: 'checkList',
+    name: '入住记录',
+    icon: 'solution'
+  },{
+    key: 'consumeList',
+    name: '消费记录',
+    icon: 'pay-circle-o'
+  },{
+    key: 'userInfo',
+    name: '会员中心',
     icon: 'user'
   },
-  {
-    key: 'ui',
-    name: 'UI组件',
-    icon: 'camera-o',
-    clickable: false,
-    child: [
-      {
-        key: 'ico',
-        name: 'Ico 图标'
-      },
-      {
-        key: 'search',
-        name: 'Search 搜索'
-      }
-    ]
-  },
-  {
-    key: 'navigation',
-    name: '测试导航',
-    icon: 'setting',
-    child: [
-      {
-        key: 'navigation1',
-        name: '二级导航1'
-      },
-      {
-        key: 'navigation2',
-        name: '二级导航2',
-        child: [
-          {
-            key: 'navigation21',
-            name: '三级导航1'
-          },
-          {
-            key: 'navigation22',
-            name: '三级导航2'
-          }
-        ]
-      }
-    ]
-  }
 ];

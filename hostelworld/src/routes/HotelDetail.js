@@ -4,18 +4,47 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import HotelDetailBlock from '../components/hotel/HotelDetailBlock'
+import ReserveModal from '../components/reserve/ReserveModal';
 
 function HotelDetail({location, dispatch, hotelInfo, app}) {
   const current = hotelInfo.current_hotel;
-  const {userId} = app;
+  const {user} = app;
   const {visible,current_room} = hotelInfo;
   const reserveModal = {
-    memberId: userId,
+    memberId: user.id,
     visible: visible,
     item: current_room,
+    onOk (data) {
+      dispatch({
+        type: `reserveInfo/create`,
+        payload: data
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'hotelInfo/hideModal'
+      })
+    }
   };
+  const detailConfig = {
+    ...current,
+    onReserve(item) {
+      dispatch({
+        type: `hotelInfo/showModal`,
+        payload: {
+          item: item
+        }
+      })
+    }
+  };
+  const ReserveModalGen = () =>
+    <ReserveModal {...reserveModal} />;
   return (
-    <HotelDetailBlock {...current}/>)
+    <div>
+      <HotelDetailBlock {...detailConfig}/>
+      <ReserveModalGen />
+    </div>
+  )
 }
 
 HotelDetail.prototypes = {

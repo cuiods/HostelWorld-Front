@@ -4,7 +4,7 @@
 import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Radio, Modal,DatePicker } from 'antd'
 const FormItem = Form.Item;
-
+const confirm = Modal.confirm;
 const formItemLayout = {
   labelCol: {
     span: 6
@@ -16,7 +16,7 @@ const formItemLayout = {
 const ReserveModal = ({
   memberId,
   visible,
-  item = {},
+  item={},
   onOk,
   onCancel,
   form: {
@@ -30,12 +30,22 @@ const ReserveModal = ({
       if (errors) {
         return;
       }
+      const form = getFieldsValue();
       const data = {
-        ...getFieldsValue(),
         roomId: item.id,
         memberId: memberId,
+        name: form.name,
+        contact: form.contact,
+        extra: form.extra,
+        start: form.start.format("YYYY-MM-DD"),
+        end: form.end.format("YYYY-MM-DD")
       };
-      onOk(data)
+      confirm({
+        title: '您确定要预约并支付吗?',
+        onOk () {
+          onOk(data);
+        }
+      })
     })
   }
 
@@ -72,12 +82,12 @@ const ReserveModal = ({
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='开始日期' hasFeedback={...formItemLayout}>
+        <FormItem label='开始日期' hasFeedback {...formItemLayout}>
           {getFieldDecorator('start', {
             rules: [{ type: 'object', required: true, message: '请输入开始时间' }],
           })(<DatePicker />)}
         </FormItem>
-        <FormItem label='结束日期' hasFeedback={...formItemLayout}>
+        <FormItem label='结束日期' hasFeedback {...formItemLayout}>
           {getFieldDecorator('end', {
             rules: [{ type: 'object', required: true, message: '请输入结束时间' }],
           })(<DatePicker />)}

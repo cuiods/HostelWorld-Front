@@ -14,11 +14,12 @@
     "open-browser-webpack-plugin": "0.0.2",
     "path-to-regexp": "^1.6.0",
     "qs": "^6.3.0",
+    "rc-tween-one": "^1.0.4",
     "react": "^15.1.0",
     "react-cookie": "^1.0.4",
+    "react-countup": "latest",
     "react-dom": "^15.1.0",
-    "watchjs": "0.0.0",
-    "react-countup": "latest"
+    "watchjs": "0.0.0"
   },
   "devDependencies": {
     "atool-build": "^0.7.6",

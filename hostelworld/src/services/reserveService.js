@@ -3,7 +3,7 @@
  */
 import {request} from "../utils/request";
 
-export async function reserve(params) {
+export async function createReserve(params) {
   return request(`/reserve`, {
     method: `POST`,
     body: JSON.stringify({
@@ -19,7 +19,7 @@ export async function reserve(params) {
 }
 
 export async function cancelReservation(params) {
-  return request(`reserve/${params.reserveId}/cancel`, {
+  return request(`/reserve/${params.reserveId}/cancel`, {
     method: `POST`
   })
 }

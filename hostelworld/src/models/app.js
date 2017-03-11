@@ -7,6 +7,7 @@ export default {
   namespace: 'app',
   state:{
     user: {
+      id: 0,
       name: '',
       phone: '12345674567',
       avatar: 'http://hostel-world.oss-cn-shanghai.aliyuncs.com/images/logo.png',
@@ -26,7 +27,9 @@ export default {
     siderFold: localStorage.getItem('antdAdminSiderFold') === 'true',
     darkTheme: localStorage.getItem('antdAdminDarkTheme') !== 'false',
     isNavbar: document.body.clientWidth < 769,
-    navOpenKeys: JSON.parse(localStorage.getItem('navOpenKeys') || '[]')
+    navOpenKeys: JSON.parse(localStorage.getItem('navOpenKeys') || '[]'),
+    appMsg: '1111',
+    msgType:1,
   },
 
   subscriptions: {
@@ -34,7 +37,6 @@ export default {
       history.listen(location => {
         if (location.pathname !== '/') {
           let userInfo = cookie.load("info");
-
           //假如没有登录,跳回登录页
           if(userInfo==null){
             dispatch(routerRedux.push('/'));
@@ -132,7 +134,6 @@ export default {
       return {...state, alertVisible: false};
     },
     storeInfo(state, action){
-
       return {
         ...state,
         user: action.payload,
@@ -195,6 +196,19 @@ export default {
         isLogin: false
       }
     },
+    addMessage (state,action) {
+      return {
+        ...state,
+        ...action.payload
+      }
+    },
+    removeMessage (state) {
+      return {
+        ...state,
+        appMsg: '',
+        msgType: 0
+      }
+    }
   }
 
 }
