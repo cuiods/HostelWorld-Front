@@ -28,6 +28,8 @@ export default function ({history}) {
         <Route path="/:userId/hotelRoomList" component={RoomList} />
         <Route path="/:userId/hotelUnfinished" component={UnfinishedCheckList}/>
         <Route path="/:userId/hotelManage" component={HotelManagePage}/>
+        <Route path="/:userId/checkRecord" component={CheckList} />
+        <Route path="/:userId/reserveRecord" component={ReserveList} />
       </Route>
     </Router>
   );

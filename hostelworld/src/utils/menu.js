@@ -33,5 +33,13 @@ module.exports = [
     key: 'hotelManage',
     name: '酒店管理',
     icon: 'setting'
+  },{
+    key: 'reserveRecord',
+    name: '预约记录',
+    icon: 'lock'
+  },{
+    key: 'checkRecord',
+    name: '入住记录',
+    icon: 'copy'
   },
 ];

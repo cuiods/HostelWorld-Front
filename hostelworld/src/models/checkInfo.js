@@ -7,7 +7,7 @@ import {getMemberChecks, getMemberReserves} from "../services/memberService";
 import pathToRegexp from 'path-to-regexp';
 import {routerRedux} from 'dva/router';
 import {getUnfinishedChecks} from "../services/roomService";
-import {getHotelUnfinishedChecks} from "../services/hotelService";
+import {getHotelUnfinishedChecks, getHotelChecks} from "../services/hotelService";
 import {checkout, addTenant, checkIn} from "../services/checkService";
 export default {
   namespace: 'checkInfo',
@@ -52,6 +52,16 @@ export default {
             }
           })
         }
+        const matchRecord = pathToRegexp('/:userId/checkRecord').exec(location.pathname);
+        if (matchRecord) {
+          let userId = matchRecord[1];
+          dispatch({
+            type: 'queryHotelAll',
+            payload: {
+              hotelId: userId
+            }
+          })
+        }
       })
     }
   },
@@ -72,6 +82,18 @@ export default {
     *queryUnfinished({payload},{call,put}) {
       yield put({ type: 'showLoading' });
       const data = yield call(getHotelUnfinishedChecks, payload);
+      if (data) {
+        yield put({
+          type: 'setChecks',
+          payload: data
+        })
+      } else {
+        yield put({type: 'cancelLoading'});
+      }
+    },
+    *queryHotelAll({payload},{call,put}) {
+      yield put({ type: 'showLoading' });
+      const data = yield call(getHotelChecks, payload);
       if (data) {
         yield put({
           type: 'setChecks',
@@ -118,9 +140,7 @@ export default {
           ids.push(tenantData.data.id);
         }
       }
-      console.log("ids:"+ids);
       const data = yield call(checkIn, {...payload,tenants:ids});
-      console.log("data:"+data);
       if (data) {
         yield put({type: 'hideInModal'});
         yield put(routerRedux.push(`/${payload.userId}/hotelUnfinished`));

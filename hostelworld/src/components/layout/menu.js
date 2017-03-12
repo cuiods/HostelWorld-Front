@@ -31,7 +31,7 @@ function Menus ({ siderFold, darkTheme, location, isNavbar, handleClickNavMenu, 
   if (userType == "member") {
     menuItems = menuItems.slice(0,5);
   } else if (userType == "hotel") {
-    menuItems = menuItems.slice(5,8);
+    menuItems = menuItems.slice(5,10);
   }
 
   const onOpenChange = (openKeys) => {

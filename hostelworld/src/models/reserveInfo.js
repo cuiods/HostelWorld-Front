@@ -6,6 +6,7 @@ import {message} from "antd";
 import {getMemberReserves} from "../services/memberService";
 import pathToRegexp from 'path-to-regexp';
 import {routerRedux} from 'dva/router';
+import {getHotelReserves} from "../services/hotelService";
 export default {
   namespace: 'reserveInfo',
 
@@ -14,6 +15,7 @@ export default {
     loading: false,
     currentItem: {},
     isMotion: localStorage.getItem('antdAdminUserIsMotion') === 'true',
+    isHotel: false,
     pagination: {
       showSizeChanger: true,
       showQuickJumper: false,
@@ -36,6 +38,16 @@ export default {
             }
           })
         }
+        const matchHotel = pathToRegexp('/:userId/reserveRecord').exec(location.pathname);
+        if (matchHotel) {
+          let userId = matchHotel[1];
+          dispatch({
+            type: 'queryHotel',
+            payload: {
+              hotelId: userId
+            }
+          })
+        }
       })
     }
   },
@@ -47,6 +59,19 @@ export default {
       if (data) {
         yield put({
           type: 'setReservations',
+          payload: data
+        })
+      } else {
+        yield put({type: 'cancelLoading'});
+      }
+    },
+
+    *queryHotel({payload},{call,put}) {
+      yield put({ type: 'showLoading' });
+      const data = yield call(getHotelReserves, payload);
+      if (data) {
+        yield put({
+          type: 'setHotelReservations',
           payload: data
         })
       } else {
@@ -99,6 +124,14 @@ export default {
       return {
         ...state,
         loading:false,
+        reserve_list: action.payload
+      }
+    },
+    setHotelReservations(state, action) {
+      return {
+        ...state,
+        loading:false,
+        isHotel: true,
         reserve_list: action.payload
       }
     }

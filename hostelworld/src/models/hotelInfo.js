@@ -2,13 +2,16 @@
  * hotel info model
  */
 import pathToRegexp from 'path-to-regexp';
-import {getHotelList, getHotelDetail} from "../services/hotelService";
+import {getHotelList, getHotelDetail, editHotel} from "../services/hotelService";
+import {message} from "antd";
+import {routerRedux} from 'dva/router';
 
 export default {
   namespace: 'hotelInfo',
 
   state: {
     visible: false,
+    editVisible: false,
     hotel_list: [],
     current_hotel: {},
     current_room: {},
@@ -60,12 +63,22 @@ export default {
 
     *queryDetail({payload},{call,put}) {
       const data = yield call(getHotelDetail,payload);
-      console.log(data);
       if (data) {
         yield put({
           type: 'setHotelDetail',
           payload: data
         })
+      }
+    },
+
+    *editHotel({payload},{call,put}) {
+      const data = yield call(editHotel, payload);
+      if (data && data.code == 200) {
+        message.success("修改成功");
+        yield put({type:"hideEditModal"});
+        yield put(routerRedux.push(`/${data.data.id}/hotelManage`));
+      } else {
+        message.error(data? data.message: "修改失败");
       }
     }
   },
@@ -98,6 +111,18 @@ export default {
         ...state,
         visible: true,
         current_room: action.payload.item
+      }
+    },
+    showEditModal(state) {
+      return {
+        ...state,
+        editVisible: true
+      }
+    },
+    hideEditModal(state) {
+      return {
+        ...state,
+        editVisible: false
       }
     }
   }

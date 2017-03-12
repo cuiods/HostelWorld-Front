@@ -6,7 +6,7 @@ import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
 import ReserveList from '../components/reserve/ReserveList'
 function Reservations({location, dispatch,reserveInfo}) {
-  const { loading, reserve_list, pagination, currentItem, isMotion } = reserveInfo;
+  const { loading, reserve_list, pagination, currentItem, isMotion ,isHotel} = reserveInfo;
 
   const reserveListProps = {
     dataSource: reserve_list,
@@ -32,7 +32,8 @@ function Reservations({location, dispatch,reserveInfo}) {
           reserveId: id
         }
       })
-    }
+    },
+    isHotel
   };
 
   return (

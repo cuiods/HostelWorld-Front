@@ -9,7 +9,7 @@ import TableBodyWrapper from '../common/TableBodyWrapper'
 import  {color}  from '../../utils/'
 
 const confirm = Modal.confirm;
-function ReserveList({ loading, dataSource, pagination, onPageChange, onDeleteItem, isMotion, location }) {
+function ReserveList({ loading, dataSource, pagination, onPageChange, onDeleteItem, isMotion, location, isHotel }) {
   const handleMenuClick = (record, e) => {
     confirm({
       title: '您确定要取消预约吗?',
@@ -73,7 +73,7 @@ function ReserveList({ loading, dataSource, pagination, onPageChange, onDeleteIt
       <Table
         className={classnames({[styles.table]: true, [styles.motion]: isMotion})}
         bordered
-        scroll={{ x: 800 }}
+        scroll={{ y: 460 }}
         columns={columns}
         dataSource={dataSource}
         loading={loading}

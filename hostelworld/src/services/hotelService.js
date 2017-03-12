@@ -42,9 +42,9 @@ export async function createHotel(params) {
 
 export async function editHotel(params) {
   return request(`/hotel/${params.hotelId}/edit`, {
-    method: `PUT`,
+    method: `POST`,
     body: JSON.stringify({
-      fullname: params.fullname,
+      fullName: params.fullName,
       location: params.location,
       x: params.x,
       y: params.y,
