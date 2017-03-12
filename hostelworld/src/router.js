@@ -9,6 +9,9 @@ import ReserveList from "./routes/ReserveList"
 import CheckList from "./routes/CheckList"
 import ConsumeList from "./routes/ConsumeList"
 import MemberDetail from "./routes/MemberDetail"
+import RoomList from "./routes/RoomList"
+import UnfinishedCheckList from './routes/UnCheckList'
+import HotelManagePage from './routes/HotelManage'
 
 
 export default function ({history}) {
@@ -22,6 +25,9 @@ export default function ({history}) {
         <Route path="/:userId/checkList" component={CheckList} />
         <Route path="/:userId/consumeList" component={ConsumeList} />
         <Route path="/:userId/userInfo" component={MemberDetail} />
+        <Route path="/:userId/hotelRoomList" component={RoomList} />
+        <Route path="/:userId/hotelUnfinished" component={UnfinishedCheckList}/>
+        <Route path="/:userId/hotelManage" component={HotelManagePage}/>
       </Route>
     </Router>
   );

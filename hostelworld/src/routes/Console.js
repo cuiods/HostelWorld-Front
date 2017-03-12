@@ -68,7 +68,8 @@ function Console({children, location, dispatch, app}) {
       localStorage.setItem('navOpenKeys', JSON.stringify(openKeys));
       dispatch({ type: 'app/handleNavOpenKeys', payload: { navOpenKeys: openKeys } })
     },
-    userId: id
+    userId: id,
+    userType: user.type,
   };
 
   return (

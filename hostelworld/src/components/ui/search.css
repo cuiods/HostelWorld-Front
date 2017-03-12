@@ -1,0 +1,44 @@
+.search {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+.search :global .anticon-cross {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  right: 84px;
+  cursor: pointer;
+  color: #fff;
+  line-height: 18px;
+  border-radius: 50%!important;
+  background-color: rgba(0, 0, 0, 0.16);
+  top: 7px;
+}
+.search :global .ant-select {
+  width: 80px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+.search :global .ant-select.ant-select-focused .ant-select-selection,
+.search :global .ant-select.ant-select-open .ant-select-selection,
+.search :global .ant-select .ant-select-selection:active,
+.search :global .ant-select .ant-select-selection:focus,
+.search :global .ant-select .ant-select-selection:hover {
+  border-color: #e5e5e5;
+  box-shadow: none;
+}
+.search :global .ant-input {
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+.search :global .ant-input:focus,
+.search :global .ant-input:hover {
+  border-color: #e5e5e5;
+  box-shadow: none;
+}
+.search :global .ant-btn {
+  width: 80px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}

@@ -5,10 +5,10 @@ import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import CheckList from '../components/checks/CheckList'
 function CheckRecords({location, dispatch,checkInfo}) {
-  const { loading, reserve_list, isMotion } = checkInfo;
+  const { loading, check_list, isMotion } = checkInfo;
 
   const reserveListProps = {
-    dataSource: reserve_list,
+    dataSource: check_list,
     loading,
     isMotion
   };

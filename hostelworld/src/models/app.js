@@ -38,6 +38,7 @@ export default {
         if (location.pathname !== '/') {
           let userInfo = cookie.load("info");
           //假如没有登录,跳回登录页
+
           if(userInfo==null){
             dispatch(routerRedux.push('/'));
           }else{
@@ -65,15 +66,16 @@ export default {
         let verifyFlag = data.code;
         if(verifyFlag == 200){
           let userVo = data.data;
+          cookie.save("info",userVo);
           BasicAuth.setAuth(payload.username, payload.password, userVo.avatar);
           yield put({
             type: 'storeInfo',
             payload: userVo
           });
           if(userVo.type === 'member'){
-            yield put(routerRedux.push(`/hotelList`));
+            yield put(routerRedux.push(`/${userVo.id}/hotelList`));
           }else if(userVo.type === 'hotel'){
-            yield put(routerRedux.push(`/hotel/console`))
+            yield put(routerRedux.push(`/${userVo.id}/hotelRoomList`))
           }else if(userVo.type === 'manager'){
           }
         }else{
@@ -119,6 +121,8 @@ export default {
       payload
     }, {call, put}) {
       const data = yield call(logout, payload);
+      BasicAuth.clearAuth();
+      cookie.remove("info");
         yield put({
           type: 'logoutSuccess'
         })

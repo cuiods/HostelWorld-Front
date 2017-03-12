@@ -1,18 +1,20 @@
 /**
- * reserve info model
+ * hotel room list
  */
-import {createReserve, cancelReservation} from "../services/reserveService";
 import {message} from "antd";
-import {getMemberReserves} from "../services/memberService";
 import pathToRegexp from 'path-to-regexp';
 import {routerRedux} from 'dva/router';
-export default {
-  namespace: 'reserveInfo',
+import {getHotelRooms} from "../services/hotelService";
+import {createRoom} from "../services/roomService";
 
-  state:{
-    reserve_list:[],
+export default {
+  namespace: "roomInfo",
+
+  state: {
+    room_list:[],
     loading: false,
     currentItem: {},
+    visible: false,
     isMotion: localStorage.getItem('antdAdminUserIsMotion') === 'true',
     pagination: {
       showSizeChanger: true,
@@ -26,13 +28,13 @@ export default {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(location => {
-        const match = pathToRegexp('/:userId/reserveList').exec(location.pathname);
+        const match = pathToRegexp('/:userId/hotelRoomList').exec(location.pathname);
         if (match) {
           let userId = match[1];
           dispatch({
             type: 'query',
             payload: {
-              memberId: userId
+              hotelId: userId
             }
           })
         }
@@ -43,10 +45,10 @@ export default {
   effects:{
     *query({payload},{call,put}) {
       yield put({ type: 'showLoading' });
-      const data = yield call(getMemberReserves, payload);
+      const data = yield call(getHotelRooms, payload);
       if (data) {
         yield put({
-          type: 'setReservations',
+          type: 'setRooms',
           payload: data
         })
       } else {
@@ -56,36 +58,34 @@ export default {
 
     *create({ payload }, { call, put }){
       yield put({ type: 'showLoading' });
-      const data = yield call(createReserve, payload);
+      const data = yield call(createRoom, payload);
       if (data) {
         let code = data.code;
         let type = code == 200? 1:2;
         if (type == 1) {
-          message.success("预约成功");
+          message.success("计划发布成功");
           yield put({
-            type: 'hotelInfo/hideModal',
+            type: 'hideModal',
             payload: {}
           });
         } else {
           message.error(data.message);
         }
       }
+      yield put({ type: 'cancelLoading' });
     },
 
-    *deleteReserve({payload}, {call,put}) {
-      yield put({ type: 'showLoading' });
-      const data = yield call(cancelReservation, payload);
-      if (data && data.code == 200) {
-        message.success("取消成功");
-        yield put(routerRedux.push(`/${data.data}/reserveList`));
-      } else {
-        message.error(data? data.message: "删除失败");
-        yield put({type: 'cancelLoading'});
-      }
-    }
   },
 
   reducers:{
+
+    showModal (state) {
+      return {...state, visible: true}
+    },
+
+    hideModal (state) {
+      return {...state, visible: false}
+    },
 
     showLoading (state) {
       return { ...state, loading: true }
@@ -95,12 +95,12 @@ export default {
       return {...state, loading: false}
     },
 
-    setReservations(state, action) {
+    setRooms(state, action) {
       return {
         ...state,
         loading:false,
-        reserve_list: action.payload
+        room_list: action.payload
       }
-    }
+    },
   }
 }

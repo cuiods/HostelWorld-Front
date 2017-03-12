@@ -20,7 +20,7 @@ function Consumes({location, dispatch,consumeInfo}) {
   )
 }
 Consumes.propTypes = {
-  checkInfo: PropTypes.object,
+  consumeInfo: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func
 };

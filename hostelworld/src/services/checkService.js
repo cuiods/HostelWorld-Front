@@ -28,11 +28,10 @@ export async function checkout(params) {
 
 
 export async function addTenant(params) {
-  return request(`/check/tenant/${params.id}`, {
+  return request(`/check/tenant`, {
     method: `POST`,
     body: JSON.stringify({
       name: params.name,
-      phone: params.phone,
       idCard: params.idCard
     })
   })

@@ -32,8 +32,9 @@ export default {
           })
         }
         const matchDetail = pathToRegexp('/hotelDetail/:hotelId').exec(location.pathname);
-        if (matchDetail) {
-          let hotelId = matchDetail[1];
+        const matchManage = pathToRegexp('/:hotelId/hotelManage').exec(location.pathname);
+        if (matchDetail || matchManage) {
+          let hotelId = matchDetail?matchDetail[1]:matchManage[1];
           dispatch({
             type: 'queryDetail',
             payload: {
@@ -59,6 +60,7 @@ export default {
 
     *queryDetail({payload},{call,put}) {
       const data = yield call(getHotelDetail,payload);
+      console.log(data);
       if (data) {
         yield put({
           type: 'setHotelDetail',

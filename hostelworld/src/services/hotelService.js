@@ -68,6 +68,12 @@ export async function getHotelChecks(params) {
   })
 }
 
+export async function getHotelUnfinishedChecks(params) {
+  return request(`/hotel/${params.hotelId}/unfinished`, {
+    method: "GET"
+  })
+}
+
 export async function getHotelRooms(params) {
   return request(`/hotel/${params.hotelId}/room`, {
     method: `GET`

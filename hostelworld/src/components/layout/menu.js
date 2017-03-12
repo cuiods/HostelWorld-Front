@@ -26,8 +26,13 @@ const getMenus = function (menuArray, userId, siderFold, parentPath) {
   })
 };
 
-function Menus ({ siderFold, darkTheme, location, isNavbar, handleClickNavMenu, navOpenKeys, changeOpenKeys ,userId}) {
-  const menuItems = getMenus(menu, userId, siderFold);
+function Menus ({ siderFold, darkTheme, location, isNavbar, handleClickNavMenu, navOpenKeys, changeOpenKeys ,userId, userType}) {
+  let menuItems = getMenus(menu, userId, siderFold);
+  if (userType == "member") {
+    menuItems = menuItems.slice(0,5);
+  } else if (userType == "hotel") {
+    menuItems = menuItems.slice(5,8);
+  }
 
   const onOpenChange = (openKeys) => {
     const latestOpenKey = openKeys.find(key => !(navOpenKeys.indexOf(key) > -1));

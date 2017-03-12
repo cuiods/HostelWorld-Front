@@ -21,5 +21,17 @@ module.exports = [
     key: 'userInfo',
     name: '会员中心',
     icon: 'user'
+  },{
+    key: 'hotelRoomList',
+    name: '房间计划',
+    icon: 'home'
+  },{
+    key: 'hotelUnfinished',
+    name: '签入签出',
+    icon: 'export'
+  },{
+    key: 'hotelManage',
+    name: '酒店管理',
+    icon: 'setting'
   },
 ];
