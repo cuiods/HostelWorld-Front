@@ -75,8 +75,9 @@ export default {
           if(userVo.type === 'member'){
             yield put(routerRedux.push(`/${userVo.id}/hotelList`));
           }else if(userVo.type === 'hotel'){
-            yield put(routerRedux.push(`/${userVo.id}/hotelRoomList`))
+            yield put(routerRedux.push(`/${userVo.id}/statHotel`));
           }else if(userVo.type === 'manager'){
+            yield put(routerRedux.push(`/${userVo.id}/dashboard`));
           }
         }else{
           BasicAuth.clearAuth();

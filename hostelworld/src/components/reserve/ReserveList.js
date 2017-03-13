@@ -73,7 +73,7 @@ function ReserveList({ loading, dataSource, pagination, onPageChange, onDeleteIt
       <Table
         className={classnames({[styles.table]: true, [styles.motion]: isMotion})}
         bordered
-        scroll={{ y: 460 }}
+        scroll={{ x: 790 }}
         columns={columns}
         dataSource={dataSource}
         loading={loading}

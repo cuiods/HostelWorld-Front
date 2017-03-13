@@ -22,7 +22,7 @@ getPathSet(menu);
 
 function Bread ({ location }) {
   let pathNames = [];
-  location.pathname.substr(1).split('/').map((item, key) => {
+  location.pathname.substr(1).split('/').slice(1).map((item, key) => {
     if (key > 0) {
       pathNames.push((pathNames[key - 1] + '-' + item).hyphenToHump())
     } else {

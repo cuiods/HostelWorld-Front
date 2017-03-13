@@ -33,7 +33,7 @@ function ConsumeList({ loading, dataSource, isMotion }) {
       <Table
         className={classnames({[styles.table]: true, [styles.motion]: isMotion})}
         bordered
-        scroll={{ x: 800 }}
+        scroll={{ y: 460 }}
         columns={columns}
         dataSource={dataSource}
         loading={loading}

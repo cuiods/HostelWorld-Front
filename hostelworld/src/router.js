@@ -12,7 +12,10 @@ import MemberDetail from "./routes/MemberDetail"
 import RoomList from "./routes/RoomList"
 import UnfinishedCheckList from './routes/UnCheckList'
 import HotelManagePage from './routes/HotelManage'
-
+import ApproveNewPage from './routes/ApproveNew'
+import ApproveEditPage from './routes/ApproveEdit'
+import CompleteCheckPage from './routes/CompleteCheck'
+import StatisticPage from './routes/StatisticPage'
 
 export default function ({history}) {
   return (
@@ -30,6 +33,11 @@ export default function ({history}) {
         <Route path="/:userId/hotelManage" component={HotelManagePage}/>
         <Route path="/:userId/checkRecord" component={CheckList} />
         <Route path="/:userId/reserveRecord" component={ReserveList} />
+        <Route path="/:userId/approveNew" component={ApproveNewPage}/>
+        <Route path="/:userId/approveEdit" component={ApproveEditPage}/>
+        <Route path="/:userId/completeChecks" component={CompleteCheckPage}/>
+        <Route path="/:userId/dashboard" component={StatisticPage}/>
+        <Route path="/:userId/statHotel" component={StatisticPage}/>
       </Route>
     </Router>
   );

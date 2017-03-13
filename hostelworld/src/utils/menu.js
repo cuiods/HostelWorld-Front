@@ -22,6 +22,10 @@ module.exports = [
     name: '会员中心',
     icon: 'user'
   },{
+    key: 'statHotel',
+    name: '实时数据',
+    icon: 'area-chart'
+  },{
     key: 'hotelRoomList',
     name: '房间计划',
     icon: 'home'
@@ -41,5 +45,29 @@ module.exports = [
     key: 'checkRecord',
     name: '入住记录',
     icon: 'copy'
+  },{
+    key: 'dashboard',
+    name: '实时统计',
+    icon: 'area-chart'
+  },{
+    key: 'approveNew',
+    name: '开店审批',
+    icon: 'plus'
+  },{
+    key: 'approveEdit',
+    name: '修改审批',
+    icon: 'edit'
+  },{
+    key: 'completeChecks',
+    name: '支付结算',
+    icon: 'file'
+  },{
+    key: 'registerHotel',
+    name: '注册酒店',
+    icon: 'home'
+  },{
+    key: 'registerMember',
+    name: '注册会员',
+    icon: 'user'
   },
 ];

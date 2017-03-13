@@ -1,3 +1,6 @@
+/**
+ * Created by cuihao on 2017/3/13.
+ */
 import React, { PropTypes } from 'react'
 import { Icon, Card } from 'antd'
 import CountUp from 'react-countup'
@@ -31,6 +34,6 @@ NumberCard.propTypes = {
   title: PropTypes.string,
   number: PropTypes.number,
   countUp: PropTypes.object
-}
+};
 
 export default NumberCard

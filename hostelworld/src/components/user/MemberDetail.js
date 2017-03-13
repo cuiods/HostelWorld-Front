@@ -12,7 +12,7 @@ function MemberDetail({id,name,phone,avatar,gender,
   onTransfer, onExchange, onStop, onEdit}) {
   const countUpProps = {
     start: 0,
-    duration: 3.75,
+    duration: 2.75,
     useEasing: true,
     useGrouping: true,
     separator: ','
