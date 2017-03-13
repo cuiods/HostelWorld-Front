@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react'
 import {Form, Icon, Input, Button, Checkbox, Alert, message, Card} from 'antd';
 import styles from './LoginForm.less';
 
@@ -6,10 +6,11 @@ const FormItem = Form.Item;
 
 const LoginForm = ({
   userId,
-  onLogin,
   alertVisible,
   loginMsg,
+  onLogin,
   closeAlert,
+  onRegisterHotel,
   form : {
     getFieldDecorator,
     validateFields
@@ -29,6 +30,10 @@ const LoginForm = ({
 
   function onClose() {
     closeAlert()
+  }
+
+  function onButtonRegister() {
+    onRegisterHotel()
   }
 
   function loginFailure(alertVisible) {
@@ -76,22 +81,26 @@ const LoginForm = ({
           })(
             <Checkbox>Remember me</Checkbox>
           )}
-          <a className={styles["login-form-forgot"]}>Forget your password?</a>
+          <a className={styles["login-form-forgot"]}>忘记密码?</a>
           <Button type="primary" htmlType="submit" className={styles["login-form-button"]}>
-            Login
+            登陆
           </Button>
-          or <a>register</a>
         </FormItem>
       </Form>
+        <div className={styles['button-margin']}>
+          <Button type="primary" onClick={onButtonRegister} className={styles["login-form-button"]}>
+            注册
+          </Button>
+        </div>
       </Card>
     </div>
   );
 
 };
 
-
 LoginForm.propTypes = {
-  login: React.PropTypes.func
+  onRegisterHotel: PropTypes.func,
 };
+
 
 export default  Form.create()(LoginForm);

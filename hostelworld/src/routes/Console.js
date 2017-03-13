@@ -13,7 +13,7 @@ import styles from '../components/layout/main.less'
 import '../components/layout/common.less'
 import { classnames } from '../utils'
 function Console({children, location, dispatch, app}) {
-  const {user,isLogin, loading, loginButtonLoading, menuPopoverVisible,
+  const {user,isLogin, isRegister, loading, loginButtonLoading, menuPopoverVisible,
     siderFold, darkTheme,isNavbar, navOpenKeys,userId, alertVisible, loginMsg, appMsg, msgType} = app;
   const userLoginProps = {
     userId,
@@ -25,6 +25,13 @@ function Console({children, location, dispatch, app}) {
         type: 'app/verify',
         payload: { ...fieldsValue },
       });
+    },
+
+    onRegisterHotel() {
+      dispatch({
+        type: 'app/register',
+        payload: {}
+      })
     },
 
     closeAlert() {
@@ -55,7 +62,7 @@ function Console({children, location, dispatch, app}) {
       dispatch({ type: 'app/handleNavOpenKeys', payload: { navOpenKeys: openKeys } })
     }
   };
-  let id = user.id;
+  let id = user?user.id:user;
   const siderProps = {
     siderFold,
     darkTheme,
@@ -69,12 +76,12 @@ function Console({children, location, dispatch, app}) {
       dispatch({ type: 'app/handleNavOpenKeys', payload: { navOpenKeys: openKeys } })
     },
     userId: id,
-    userType: user.type,
+    userType: user?user.type:user,
   };
 
   return (
     <div>
-      {isLogin?
+      {isLogin || isRegister?
         <div className={classnames(styles.layout, {[styles.fold]: isNavbar ? false : siderFold}, {[styles.withnavbar]: isNavbar})}>
           {!isNavbar ? <aside className={classnames(styles.sider, {[styles.light]: !darkTheme})}>
               <Sider {...siderProps} />

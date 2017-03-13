@@ -2,7 +2,7 @@
  * hotel info model
  */
 import pathToRegexp from 'path-to-regexp';
-import {getHotelList, getHotelDetail, editHotel} from "../services/hotelService";
+import {getHotelList, getHotelDetail, editHotel, createHotel} from "../services/hotelService";
 import {message} from "antd";
 import {routerRedux} from 'dva/router';
 
@@ -79,6 +79,17 @@ export default {
         yield put(routerRedux.push(`/${data.data.id}/hotelManage`));
       } else {
         message.error(data? data.message: "修改失败");
+      }
+    },
+
+    *create({payload}, {call,put}) {
+      const data = yield call(createHotel, payload);
+      if (data && data.code == 200) {
+        message.success("注册成功，请登陆",5000);
+        yield put({type: 'app/finishRegister'});
+        yield put(routerRedux.push(`/`));
+      } else {
+        message.error(data? data.message: "注册失败");
       }
     }
   },

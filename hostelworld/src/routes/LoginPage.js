@@ -7,7 +7,7 @@ import { connect } from 'dva';
 import LoginForm from '../components/login/LoginForm';
 
 
-function LoginPage({ location, dispatch, signInInfo }) {
+function LoginPage({ location, dispatch, signInInfo ,app}) {
 
   const {userId, alertVisible, loginMsg} = signInInfo;
 
@@ -23,12 +23,19 @@ function LoginPage({ location, dispatch, signInInfo }) {
       });
     },
 
+    onRegisterHotel() {
+      dispatch({
+        type: 'app/register',
+        payload: {}
+      })
+    },
+
     closeAlert() {
       dispatch({
         type: 'signInInfo/closeAlert',
         payload: {}
       })
-    }
+    },
   };
 
   return (
@@ -40,10 +47,11 @@ LoginPage.propTypes = {
   location: PropTypes.object,
   dispatch: PropTypes.func,
   signInInfo: PropTypes.object,
+  app: PropTypes.object
 };
 
-function mapStateToProps({ signInInfo }) {
-  return { signInInfo };
+function mapStateToProps({ signInInfo,app }) {
+  return { signInInfo,app };
 }
 
 export default connect(mapStateToProps)(LoginPage);

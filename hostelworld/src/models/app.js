@@ -2,6 +2,8 @@ import cookie from 'react-cookie';
 import {routerRedux} from 'dva/router';
 import {login, logout} from "../services/verifyService";
 import BasicAuth from "../utils/BasicAuth";
+import {createMember} from "../services/memberService";
+import {message} from "antd";
 
 export default {
   namespace: 'app',
@@ -12,7 +14,7 @@ export default {
       phone: '12345674567',
       avatar: 'http://hostel-world.oss-cn-shanghai.aliyuncs.com/images/logo.png',
       gender: 'male',
-      type: 'member',
+      type: 'register',
       createdAt: '1487039370000',
       updateAt: '1487039370000',
       valid: 0,
@@ -21,6 +23,7 @@ export default {
     alertVisible: false,
     loginMsg: "",
     isLogin: false,
+    isRegister: false,
     loading: false,
     loginButtonLoading: false,
     menuPopoverVisible: false,
@@ -40,7 +43,7 @@ export default {
           //假如没有登录,跳回登录页
 
           if(userInfo==null){
-            dispatch(routerRedux.push('/'));
+            // dispatch(routerRedux.push('/'));
           }else{
             dispatch({
               type: 'storeInfo',
@@ -128,6 +131,20 @@ export default {
           type: 'logoutSuccess'
         })
     },
+    *register({payload}, {call,put}) {
+      yield put({type: 'setRegister'});
+      yield put(routerRedux.push(`/register/registerMember`));
+    },
+    *createMember({payload}, {call,put}) {
+      const data = yield call(createMember, payload);
+      if (data && data.code == 200) {
+        message.success("注册成功，请登陆",5000);
+        yield put({type: 'finishRegister'});
+        yield put(routerRedux.push(`/`));
+      } else {
+        message.error(data? data.message: "注册失败");
+      }
+    }
   },
 
   reducers:{
@@ -212,6 +229,18 @@ export default {
         ...state,
         appMsg: '',
         msgType: 0
+      }
+    },
+    setRegister(state) {
+      return {
+        ...state,
+        isRegister: true
+      }
+    },
+    finishRegister(state) {
+      return {
+        ...state,
+        isRegister: false
       }
     }
   }

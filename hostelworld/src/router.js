@@ -16,6 +16,8 @@ import ApproveNewPage from './routes/ApproveNew'
 import ApproveEditPage from './routes/ApproveEdit'
 import CompleteCheckPage from './routes/CompleteCheck'
 import StatisticPage from './routes/StatisticPage'
+import RegisterHotelPage from './routes/RegisterHotelPage'
+import RegisterMemberPage from './routes/RegisterMemberPage'
 
 export default function ({history}) {
   return (
@@ -38,6 +40,8 @@ export default function ({history}) {
         <Route path="/:userId/completeChecks" component={CompleteCheckPage}/>
         <Route path="/:userId/dashboard" component={StatisticPage}/>
         <Route path="/:userId/statHotel" component={StatisticPage}/>
+        <Route path="/register/registerHotel" component={RegisterHotelPage}/>
+        <Route path="/register/registerMember" component={RegisterMemberPage}/>
       </Route>
     </Router>
   );

@@ -4,7 +4,7 @@ import { Link } from 'dva/router'
 import { menu } from '../../utils'
 
 const topMenus = menu.map(item => item.key);
-const getMenus = function (menuArray, userId, siderFold, parentPath) {
+const getMenus = function (menuArray, userId, userType, siderFold, parentPath) {
   parentPath = parentPath || '/';
   return menuArray.map(item => {
     if (item.child) {
@@ -16,7 +16,7 @@ const getMenus = function (menuArray, userId, siderFold, parentPath) {
     } else {
       return (
         <Menu.Item key={item.key}>
-          <Link to={parentPath + userId + '/' +item.key}>
+          <Link to={parentPath + userType=='register'?userId:'register' + '/' +item.key}>
             {item.icon ? <Icon type={item.icon} /> : ''}
             {siderFold && topMenus.indexOf(item.key) >= 0 ? '' : item.name}
           </Link>
@@ -27,7 +27,7 @@ const getMenus = function (menuArray, userId, siderFold, parentPath) {
 };
 
 function Menus ({ siderFold, darkTheme, location, isNavbar, handleClickNavMenu, navOpenKeys, changeOpenKeys ,userId, userType}) {
-  let menuItems = getMenus(menu, userId, siderFold);
+  let menuItems = getMenus(menu, userId, userType, siderFold);
   if (userType == "member") {
     menuItems = menuItems.slice(0,5);
   } else if (userType == "hotel") {
