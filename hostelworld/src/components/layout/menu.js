@@ -16,7 +16,7 @@ const getMenus = function (menuArray, userId, userType, siderFold, parentPath) {
     } else {
       return (
         <Menu.Item key={item.key}>
-          <Link to={parentPath + userType=='register'?userId:'register' + '/' +item.key}>
+          <Link to={parentPath + (userType=='register'||userId==0?'register':userId )+ '/' +item.key}>
             {item.icon ? <Icon type={item.icon} /> : ''}
             {siderFold && topMenus.indexOf(item.key) >= 0 ? '' : item.name}
           </Link>

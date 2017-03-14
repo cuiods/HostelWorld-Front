@@ -215,7 +215,11 @@ export default {
     logoutSuccess (state) {
       return {
         ...state,
-        isLogin: false
+        isLogin: false,
+        isRegister: false,
+        user: {
+          type: "register"
+        }
       }
     },
     addMessage (state,action) {

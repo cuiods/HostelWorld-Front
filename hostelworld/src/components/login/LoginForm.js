@@ -87,6 +87,7 @@ const LoginForm = ({
           </Button>
         </FormItem>
       </Form>
+        <div style={{textAlign: "center"}}>或者</div>
         <div className={styles['button-margin']}>
           <Button type="primary" onClick={onButtonRegister} className={styles["login-form-button"]}>
             注册

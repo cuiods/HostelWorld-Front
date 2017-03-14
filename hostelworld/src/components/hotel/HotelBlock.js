@@ -16,7 +16,6 @@ function HotelBlock({dispatch, id, createdAt, updatedAt, fullname, state, locati
   else if (star == "five") value = 5;
   const buttonParams = {
     type:"primary",
-    icon:"search",
     onClick() {
       dispatch(routerRedux.push(`/hotelDetail/${id}`));
     }
@@ -39,7 +38,7 @@ function HotelBlock({dispatch, id, createdAt, updatedAt, fullname, state, locati
             <Col span={15}>{location}</Col>
           </Row>
         </Col>
-        <Col className={styles['icon_detail']} span={1}><Button {...buttonParams} /></Col>
+        <Col className={styles['icon_detail']} span={1}><Button {...buttonParams}>详情</Button></Col>
       </Row>
     </div>
   );
