@@ -68,6 +68,7 @@ const CheckInModal = ({
         title: '确定入住吗?',
         onOk () {
           onOk(data);
+          uuid = 0;
         }
       })
     })

@@ -28,7 +28,7 @@ export async function createHotel(params) {
       phone: params.phone,
       avatar: params.avatar,
       gender: params.gender,
-      fullname: params.fullname,
+      fullName: params.fullName,
       location: params.location,
       x: params.x,
       y: params.y,

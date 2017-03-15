@@ -152,7 +152,7 @@ const RegisterHotel = ({
         hasFeedback
       >
         {getFieldDecorator('fullName', {
-          rules: [{ required: true, message: '请输入酒店全称' }],
+          rules: [{ required: true, message: '请输入酒店全名' }],
         })(
           <Input />
         )}

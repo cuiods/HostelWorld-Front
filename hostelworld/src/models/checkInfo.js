@@ -141,7 +141,7 @@ export default {
         }
       }
       const data = yield call(checkIn, {...payload,tenants:ids});
-      if (data) {
+      if (data && data.code==200) {
         yield put({type: 'hideInModal'});
         yield put(routerRedux.push(`/${payload.userId}/hotelUnfinished`));
         message.success("入住成功");

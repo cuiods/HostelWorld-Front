@@ -84,6 +84,7 @@ export default {
 
     *create({payload}, {call,put}) {
       const data = yield call(createHotel, payload);
+      console.log(data);
       if (data && data.code == 200) {
         message.success("注册成功，请登陆",5000);
         yield put({type: 'app/finishRegister'});
