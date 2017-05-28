@@ -19,6 +19,7 @@
 
 ##Get Started
  * 确保服务器已经打开，服务器地址在配置文件`service/hostConfig.js`里`const host = "http://localhost:8080/api/v1";`
+ * INSTALL: `npm install`
  * BUILD: `npm run build`
  * START: `npm run start`
 
